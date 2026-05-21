@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio – Anas Abrouk</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f3ef;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #2c5f8a;
+      --accent2: #e8a838;
+      --border: #ddd9d2;
+      --radius: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245,243,239,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--accent); }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.88rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* SECTIONS */
+    section { padding: 4rem 2rem; max-width: 860px; margin: 0 auto; }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.7rem;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--accent2);
+      display: inline-block;
+    }
+
+    /* HEADER */
+    #header {
+      background: var(--accent);
+      color: white;
+      padding: 4rem 2rem 3.5rem;
+      text-align: center;
+    }
+    .header-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: #e8a838;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      font-family: 'DM Serif Display', serif;
+      color: white;
+      margin: 0 auto 1.2rem;
+      border: 3px solid rgba(255,255,255,0.3);
+    }
+    #header h1 { font-family: 'DM Serif Display', serif; font-size: 2.2rem; margin-bottom: .3rem; }
+    #header h2 { font-size: .95rem; font-weight: 300; opacity: .75; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .4rem; }
+    #header p { font-size: .9rem; opacity: .65; }
+
+    /* PRESENTATION */
+    #presentation p {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+      font-size: .95rem;
+      color: #333;
+    }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 1.6rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 6px; bottom: 6px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 1.6rem; }
+    .tl-item::before {
+      content: '';
+      position: absolute; left: -1.97rem; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent2);
+      border: 2px solid var(--accent);
+    }
+    .tl-date { font-size: .78rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .2rem; }
+    .tl-title { font-weight: 600; font-size: .95rem; }
+    .tl-sub { font-size: .88rem; color: var(--muted); }
+
+    /* FORMATION BTS */
+    .bts-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+      font-size: .93rem;
+    }
+    .bts-box h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: .6rem; }
+    .bts-box p { color: #444; }
+
+    /* METIERS */
+    .metiers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .metier-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+    }
+    .metier-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: .4rem; color: var(--accent); }
+    .metier-card p { font-size: .87rem; color: var(--muted); }
+    .metier-card a { font-size: .8rem; color: var(--accent2); text-decoration: none; display: inline-block; margin-top: .5rem; }
+
+    /* COMPETENCES */
+    .comp-list { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; }
+    .comp-list li {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: .35rem .9rem;
+      font-size: .85rem;
+      color: var(--text);
+    }
+    .comp-list li span { color: var(--accent); font-weight: 600; margin-right: .3rem; }
+
+    /* REALISATIONS */
+    .real-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .real-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      cursor: pointer;
+      transition: border-color .2s, transform .15s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .real-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .real-icon { font-size: 1.6rem; margin-bottom: .7rem; }
+    .real-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .3rem; }
+    .real-card p { font-size: .82rem; color: var(--muted); }
+    .real-badge {
+      display: inline-block; margin-top: .6rem;
+      font-size: .72rem; font-weight: 600;
+      background: #eef3f8; color: var(--accent);
+      border-radius: 4px; padding: .2rem .5rem;
+    }
+
+    /* CV */
+    .cv-block {
+      display: flex; align-items: center; gap: 1.2rem;
+      background: white; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem 1.6rem;
+    }
+    .cv-block p { font-size: .9rem; color: var(--muted); }
+    .cv-block a {
+      display: inline-block;
+      background: var(--accent); color: white;
+      text-decoration: none; padding: .55rem 1.2rem;
+      border-radius: 6px; font-size: .88rem; font-weight: 500;
+      white-space: nowrap;
+      transition: background .2s;
+    }
+    .cv-block a:hover { background: #1e4570; }
+
+    /* VEILLE */
+    .veille-intro {
+      background: white; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem 1.6rem;
+      font-size: .9rem; color: #444; margin-bottom: 1.2rem;
+    }
+    .veille-item {
+      border-left: 3px solid var(--accent2);
+      padding-left: 1rem; margin-bottom: 1.2rem;
+    }
+    .veille-item h3 { font-size: .95rem; font-weight: 600; margin-bottom: .4rem; }
+    .veille-item p { font-size: .88rem; color: #555; }
+
+    /* CONTACT */
+    .contact-form { display: flex; flex-direction: column; gap: .8rem; max-width: 520px; }
+    .contact-form input,
+    .contact-form textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      padding: .7rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: white;
+      color: var(--text);
+      resize: vertical;
+      transition: border-color .2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { outline: none; border-color: var(--accent); }
+    .contact-form button {
+      align-self: flex-start;
+      background: var(--accent); color: white;
+      border: none; border-radius: 6px;
+      padding: .65rem 1.4rem; font-size: .9rem; font-weight: 500;
+      cursor: pointer; transition: background .2s;
+    }
+    .contact-form button:hover { background: #1e4570; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .metiers-grid, .real-grid { grid-template-columns: 1fr; }
+      .cv-block { flex-direction: column; align-items: flex-start; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Anas Abrouk</span>
+  <ul class="nav-links">
+    <li><a href="#presentation">Présentation</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#metiers">Métiers</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#veille">Veille</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-avatar">AA</div>
+  <h1>Anas Abrouk</h1>
+  <h2>Étudiant en informatique</h2>
+  <p>Développement d'applications &nbsp;·&nbsp; BTS SIO – option SLAM</p>
+</header>
+
+<!-- PRÉSENTATION -->
+<section id="presentation">
+  <span class="section-title">À propos</span>
+  <p>
+    Titulaire d'un Bac Pro MELEC (électrotechnique), j'ai décidé de me réorienter vers l'informatique et plus particulièrement
+    le développement d'applications. Ce virage n'est pas anodin : pendant ma formation en électrotechnique, j'ai été amené à
+    travailler sur des systèmes automatisés et à comprendre la logique derrière les programmes embarqués, ce qui a attisé ma
+    curiosité pour le code. Je me suis donc inscrit en BTS SIO option SLAM pour construire des bases solides en programmation
+    et me préparer à intégrer le monde professionnel du développement. Mon objectif à court terme est de décrocher un stage
+    valorisant, et à plus long terme de travailler sur des projets web ou mobiles concrets.
+  </p>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <span class="section-title">Mon parcours</span>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-date">Sept. 2021 – Juil. 2024</div>
+      <div class="tl-title">Bac Pro Métiers de l'Électrotechnique (MELEC)</div>
+      <div class="tl-sub">Lycée professionnel — Obtention du diplôme en juillet 2024</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Fév. 2024 – Mai 2024</div>
+      <div class="tl-title">Stage — MGS Elec, Cormeilles-en-Parisis</div>
+      <div class="tl-sub">Découverte du domaine informatique en entreprise · Assistance technique, support utilisateur, gestion de parc</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Sept. 2024 – 2026</div>
+      <div class="tl-title">BTS Services Informatiques aux Organisations (SIO) — option SLAM</div>
+      <div class="tl-sub">En cours de formation — 1re année</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">2025 (à venir)</div>
+      <div class="tl-title">Stage BTS SIO — Développement d'applications</div>
+      <div class="tl-sub">Recherche active en cours</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FORMATION BTS -->
+<section id="formation">
+  <span class="section-title">Formation actuelle</span>
+  <div class="bts-box">
+    <h3>BTS SIO – Services Informatiques aux Organisations</h3>
+    <p>
+      Le BTS SIO forme des techniciens capables de répondre aux besoins informatiques des organisations,
+      que ce soit en termes de développement applicatif (option SLAM) ou d'administration des infrastructures réseau (option SISR).
+      En option SLAM, la formation porte sur la conception, le développement et la maintenance de solutions logicielles :
+      applications web, logiciels métiers, bases de données. Elle aborde aussi la qualité logicielle, les méthodes de conception
+      (Merise, UML) et le travail collaboratif via des outils comme GitHub.
+    </p>
+  </div>
+</section>
+
+<!-- MÉTIERS -->
+<section id="metiers">
+  <span class="section-title">Métiers visés</span>
+  <div class="metiers-grid">
+
+    <div class="metier-card">
+      <h3>Développeur web</h3>
+      <p>Conception et développement de sites et applications web, front-end comme back-end.
+         Maîtrise des technologies HTML/CSS, JavaScript, PHP et des frameworks associés.</p>
+      <a href="#">→ Voir la carte heuristique</a>
+    </div>
+
+    <div class="metier-card">
+      <h3>Développeur d'applications mobiles</h3>
+      <p>Création d'applications pour smartphones et tablettes (Android/iOS).
+         Interfaces ergonomiques, performance et expérience utilisateur au cœur du métier.</p>
+      <a href="#">→ Voir la carte heuristique</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences">
+  <span class="section-title">Compétences (1re année)</span>
+  <p style="font-size:.88rem; color:var(--muted); margin-bottom:1rem;">Compétences en cours d'acquisition dans le cadre du BTS SIO option SLAM.</p>
+  <ul class="comp-list">
+    <li><span>Langages</span> C#</li>
+    <li><span>Langages</span> PHP</li>
+    <li><span>Langages</span> HTML / CSS</li>
+    <li><span>Langages</span> JavaScript</li>
+    <li><span>Langages</span> Java</li>
+    <li><span>Langages</span> Python</li>
+    <li><span>CMS</span> WordPress</li>
+    <li><span>BDD</span> MySQL</li>
+    <li><span>BDD</span> PostgreSQL</li>
+    <li><span>BDD</span> MongoDB</li>
+    <li><span>Qualité</span> Normes KISS / DRY / SOLID</li>
+    <li><span>Qualité</span> Tests unitaires</li>
+    <li><span>Méthode</span> Merise / UML</li>
+    <li><span>Collab.</span> GitHub</li>
+    <li><span>IDE</span> Visual Studio / NetBeans / Eclipse / PyCharm</li>
+  </ul>
+</section>
+
+<!-- RÉALISATIONS -->
+<section id="realisations">
+  <span class="section-title">Réalisations</span>
+  <div class="real-grid">
+
+    <a class="real-card" href="#">
+      <div class="real-icon">💼</div>
+      <h3>Stage — MGS Elec</h3>
+      <p>Stage de 3 mois chez MGS Elec à Cormeilles-en-Parisis (fév.–mai 2024). Première expérience en entreprise dans le domaine informatique : assistance aux utilisateurs, découverte de la gestion de parc et de l'environnement réseau.</p>
+      <span class="real-badge">Fév. – Mai 2024</span>
+    </a>
+
+    <a class="real-card" href="#">
+      <div class="real-icon">🛠️</div>
+      <h3>Atelier 2</h3>
+      <p>Projet de développement réalisé dans le cadre de la formation BTS SIO.</p>
+      <span class="real-badge">En cours</span>
+    </a>
+
+    <a class="real-card" href="#">
+      <div class="real-icon">📅</div>
+      <h3>Agenda en C#</h3>
+      <p>Application de gestion d'agenda en orienté objet avec sérialisation des données.</p>
+      <span class="real-badge">C# – POO</span>
+    </a>
+
+    <a class="real-card" href="#">
+      <div class="real-icon">🌐</div>
+      <h3>Site web responsive</h3>
+      <p>Corrections, mise en conformité RGPD et déploiement d'un site de présentation d'articles.</p>
+      <span class="real-badge">PHP / HTML / CSS</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv">
+  <span class="section-title">Curriculum Vitæ</span>
+  <div class="cv-block">
+    <p>Mon CV est disponible en téléchargement au format PDF. Il regroupe mon parcours, mes compétences et mes disponibilités pour un stage.</p>
+    <a href="#">⬇ Télécharger le CV</a>
+  </div>
+</section>
+
+<!-- VEILLE INFORMATIONNELLE -->
+<section id="veille">
+  <span class="section-title">Veille informationnelle</span>
+
+  <div class="veille-intro">
+    Pour rester informé des évolutions du secteur informatique, j'utilise plusieurs outils de veille :
+    <strong>Feedly</strong> pour agréger des flux RSS de sites spécialisés (Le Monde Informatique, Dev.to, MDN Blog),
+    <strong>Google Alertes</strong> pour recevoir des notifications sur des mots-clés ciblés, et
+    <strong>Twitter/X</strong> pour suivre des développeurs et experts du domaine.
+    Cette démarche me permet de suivre les tendances sans y passer des heures chaque jour.
+  </div>
+
+  <div class="veille-item">
+    <h3>Thème 1 — Le développement web moderne</h3>
+    <p>
+      Le développement web évolue rapidement : nouveaux frameworks JavaScript (React, Vue, Svelte),
+      montée en puissance des Progressive Web Apps, adoption de TypeScript... Je surveille ce thème
+      car il est directement lié à mon orientation professionnelle. Comprendre les tendances me permet
+      d'orienter mes apprentissages vers des technologies qui auront de la valeur sur le marché du travail.
+    </p>
+  </div>
+
+  <div class="veille-item">
+    <h3>Thème 2 — La cybersécurité des applications</h3>
+    <p>
+      Les failles de sécurité dans les applications web (injections SQL, XSS, CSRF...) sont un sujet
+      incontournable pour tout développeur. Je surveille ce thème pour comprendre les bonnes pratiques
+      dès ma formation et ne pas reproduire les erreurs les plus courantes dans mes propres projets.
+      Des sources comme OWASP ou les bulletins de sécurité CVE font partie de ma veille régulière.
+    </p>
+  </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-title">Contact</span>
+  <div class="contact-form">
+    <input type="text" placeholder="Votre nom" />
+    <input type="email" placeholder="Votre adresse email" />
+    <input type="text" placeholder="Objet" />
+    <textarea rows="5" placeholder="Votre message..."></textarea>
+    <button type="button">Envoyer</button>
+  </div>
+</section>
+
+<footer>
+  &copy; 2024 Anas Abrouk — Portfolio BTS SIO SLAM
+</footer>
+
+</body>
+</html>
